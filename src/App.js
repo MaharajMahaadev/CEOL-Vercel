@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Client } from "@gradio/client";
 
 function App() {
   const [base64Images, setBase64Images] = useState([]);
@@ -26,18 +27,35 @@ function App() {
     }
   };
 
-  const sendImagesToBackend = async () => {
-    const response = await fetch('https://ceol-model.onrender.com/analyze', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ img: base64Images })
-    });
-    
-    const result = await response.json();
-    console.log(result);
-  };
+  async function sendText(){
+    try{
+      const what = await Client.connect("maharajmahaadev/CEOL-Model");
+      const res = await what.predict("/analyze", {img_base64: JSON.stringify({ img: base64Images })});
+
+      console.log(res.data);
+    }
+    catch(error){
+      throw new Error("Didn't work");
+    }
+  }
+
+  async function checkBack(){
+    try{
+      const response = await fetch('/api/predict', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({img_base64: JSON.stringify({ img: base64Images })})
+      });
+      
+      const result = await response.json();
+      console.log(result);
+    }
+    catch(error){
+      throw new Error("error to fetch");
+    }
+  }
   
   // Call sendImagesToBackend after images are uploaded, for example with a button click
   
@@ -46,8 +64,9 @@ function App() {
     <div>
       <input type="file" multiple onChange={handleImageUpload} />
       <button onClick={() => console.log(base64Images)}>Log Base64 Images</button>
-      <button onClick={sendImagesToBackend}>Send</button>
       {/* Here you can also call your fetch function to send the images to the backend */}
+      <button onClick={() => sendText()}>Call</button>
+      <button onClick={() => checkBack()}>Click me</button>
     </div>
   );
 }
