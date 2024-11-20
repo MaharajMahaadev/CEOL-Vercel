@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Client } from "@gradio/client";
 
 function App() {
   const [base64Images, setBase64Images] = useState([]);
@@ -27,17 +26,7 @@ function App() {
     }
   };
 
-  async function sendText(){
-    try{
-      const what = await Client.connect("maharajmahaadev/CEOL-Model");
-      const res = await what.predict("/analyze", {img_base64: JSON.stringify({ img: base64Images })});
-
-      console.log(res.data);
-    }
-    catch(error){
-      throw new Error("Didn't work");
-    }
-  }
+  
 
   async function checkBack(){
     try{
@@ -65,7 +54,7 @@ function App() {
       <input type="file" multiple onChange={handleImageUpload} />
       <button onClick={() => console.log(base64Images)}>Log Base64 Images</button>
       {/* Here you can also call your fetch function to send the images to the backend */}
-      <button onClick={() => sendText()}>Call</button>
+      <button>Call</button>
       <button onClick={() => checkBack()}>Click me</button>
     </div>
   );
