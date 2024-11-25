@@ -1,63 +1,34 @@
-import React, { useState } from 'react';
+import './App.css'
+import Home from './components/Home'
+import Predict from './components/Predict'
+import Songs from './components/Songs';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
-  const [base64Images, setBase64Images] = useState([]);
 
-  function convertImageToBase64(file) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = (error) => reject(error);
-    });
-  }
-  
-
-  const handleImageUpload = async (event) => {
-    const files = event.target.files;
-    const base64Promises = Array.from(files).map(file => convertImageToBase64(file));
-
-    try {
-      const base64ImagesArray = await Promise.all(base64Promises);
-      setBase64Images(base64ImagesArray);
-      console.log(base64ImagesArray);  // ["data:image/jpeg;base64,...", "data:image/jpeg;base64,...", ...]
-    } catch (error) {
-      console.error("Error converting images to base64:", error);
-    }
-  };
-
-  
-
-  async function checkBack(){
-    try{
-      const response = await fetch('/api/predict', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({img_base64: JSON.stringify({ img: base64Images })})
-      });
-      
-      const result = await response.json();
-      console.log(result);
-    }
-    catch(error){
-      throw new Error("error to fetch");
-    }
-  }
-  
-  // Call sendImagesToBackend after images are uploaded, for example with a button click
-  
-
-  return (
-    <div>
-      <input type="file" multiple onChange={handleImageUpload} />
-      <button onClick={() => console.log(base64Images)}>Log Base64 Images</button>
-      {/* Here you can also call your fetch function to send the images to the backend */}
-      <button>Call</button>
-      <button onClick={() => checkBack()}>Click me</button>
-    </div>
-  );
+    return (
+        <>
+            <nav className="nav-bar">
+                <a href="/" className='ch1'>CEOL</a>
+                <h2>Song Recommendation using Emotion Recognition</h2>
+                <a href="/predict" className='clinks'>Prediction</a>
+            </nav>
+            <div className="main-div">
+                <BrowserRouter>
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/predict" element={<Predict />} />
+                        <Route path="/play" element={<Songs />} />
+                    </Routes>
+                </BrowserRouter>
+            </div>
+            <footer className="foot-style">
+                <a target='_blank' href='https://github.com/MaharajMahaadev' className='clinks'>Github</a>
+                <p>Created by Maharaj Mahaadev</p>
+                <a target='_blank' href='https://maharajmahaadev.vercel.app/' className='clinks'>Portfolio</a>
+            </footer>
+        </>
+    )
 }
 
-export default App;
+export default App

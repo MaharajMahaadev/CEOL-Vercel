@@ -13,8 +13,6 @@ export async function POST(request) {
       headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
-    console.error("Error occurred:", error);
-
     return new Response(
       JSON.stringify({ error: "Prediction failed", details: error.message }),
       {

@@ -1,0 +1,129 @@
+.section-div {
+  height: 100%;
+  position: relative;
+}
+
+.section-div button {
+  margin-right: 5%;
+}
+
+.loading-div {
+  z-index: 10;
+  background-color: #e5e8e8;
+  width: 90%;
+  height: 55vh;
+  position: absolute;
+  opacity: 95%;
+  padding: 5%;
+  font-weight: bolder;
+  justify-content: center;
+  align-content: center;
+  border-radius: 3%;
+  box-shadow: 10px 10px 10px;
+}
+
+.camdiv {
+  margin: 1%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.uploaddiv {
+  margin: 1%;
+  display: block;
+}
+
+/* Container Styling */
+.upload-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Drag and Drop Area */
+.drag-drop {
+  padding: 30px;
+  border: 2px dashed #6c757d;
+  border-radius: 8px;
+  background-color: #ffffff;
+  margin-bottom: 20px;
+  cursor: pointer;
+  position: relative;
+}
+
+.drag-drop p {
+  color: #6c757d;
+  font-size: 16px;
+}
+
+.drag-drop:hover {
+  background-color: #e9ecef;
+}
+
+.file-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Upload Button */
+.upload-button {
+  background-color: #424949;
+  color: #e5e8e8;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.6s ease;
+  position: relative;
+}
+
+.upload-button:hover {
+  background-color: #e5e8e8;
+  color: #424949;
+}
+
+.upload-button input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+/* Image Preview */
+.image-preview {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+}
+
+/* Remove Button */
+.remove-button {
+  background-color: #dc3545;
+  color: #fff;
+  padding: 8px 15px;
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.remove-button:hover {
+  background-color: #9c202d;
+}

@@ -1,0 +1,26 @@
+.song-div{
+    display: flex;
+    justify-content:space-evenly;
+    margin: 5%;
+}
+
+.song-div iframe{
+    background-color: #e5e8e8;
+    padding: 1%;
+    border-radius: 2%;
+    box-shadow: 5px 5px 10px;
+}
+
+.song-innerdiv{
+    align-content: center;
+    font-weight: bold;
+    text-align: center;
+    background-color: #e5e8e8;
+    border-radius: 10%;
+    box-shadow: 5px 5px 10px;
+    padding: 1%;
+}
+
+.song-innerdiv button{
+    margin: 2%;
+}
