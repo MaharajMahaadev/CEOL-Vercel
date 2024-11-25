@@ -66,7 +66,6 @@ function Predict() {
       console.log(result);
       sessionStorage.setItem('result', result.emotion);
       sessionStorage.setItem('probability', result.probability);
-      window.location.href = '/play';
     }
     catch (error) {
       val = 2;
