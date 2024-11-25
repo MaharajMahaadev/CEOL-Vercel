@@ -3,8 +3,8 @@ import data from "../data"
 import React, { useEffect, useState } from "react";
 
 function Songs() {
-    const result = sessionStorage.getItem('result');
-    const probability = sessionStorage.getItem('probability');
+    const result = sessionStorage.getItem('result') || "Happy";
+    const probability = sessionStorage.getItem('probability') || 0.0;
     const [ytUrl, useYtUrl] = useState(data[0][0]);
     const [songCategory, useSongCategory] = useState(-1);
 
@@ -50,7 +50,7 @@ function Songs() {
     }
 
     useEffect(() => {
-        result!==null?ChangeCategory(String(result).charAt(0).toUpperCase() + String(result).slice(1)):ChangeCategory("Happy");
+        ChangeCategory(String(result).charAt(0).toUpperCase() + String(result).slice(1));
     }, []);
 
     useEffect(() => {
