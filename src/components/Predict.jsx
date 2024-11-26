@@ -63,7 +63,6 @@ function Predict() {
       });
 
       const result = await response.json();
-      console.log(result);
       sessionStorage.setItem('result', result.data[0].emotion ?? "Happy");
       sessionStorage.setItem('probability', result.data[0].probability ?? 0.0);
       window.location.href = '/play';

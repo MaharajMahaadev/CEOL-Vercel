@@ -2,7 +2,7 @@ import { Client } from "@gradio/client";
 
 export async function POST(request) {
   try {
-    const client = await Client.connect("maharajmahaadev/CEOL-Model");
+    const client = await Client.connect(process.env.MODEL_API);
 
     const requestBody = await request.json();
 
