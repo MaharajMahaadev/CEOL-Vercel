@@ -2,7 +2,7 @@
 
 ## Song Recommendation Using Emotion Recognition
 
-This project is a web-based application and the android app is available at ([GithubLink](https://github.com/HARSHA123361/Emotion-Detection-using-Facial-Expression)) that uses facial emotion recognition to recommend calming and positive music tailored to the user’s emotional state. The application is designed to analyze a human face from an uploaded image or webcam, predict the user's emotion using a Convolutional Neural Network (CNN) model and then suggest appropriate songs to counteract negative emotions or enhance positive ones.
+This project is a web-based application, check out the ([hosted website](https://ceol.vercel.app/)) and the android app is available at ([GithubLink](https://github.com/HARSHA123361/Emotion-Detection-using-Facial-Expression)) that uses facial emotion recognition to recommend calming and positive music tailored to the user's emotional state. The application is designed to analyze a human face from an uploaded image or webcam, predict the user's emotion using a Convolutional Neural Network (CNN) model ([Github Link](https://github.com/MaharajMahaadev/CEOL-Model)) and then suggest appropriate songs to counteract negative emotions or enhance positive ones.
 
 ## Table of Contents
 - [Overview](#overview)
