@@ -2,6 +2,9 @@
     display: flex;
     justify-content:space-evenly;
     margin: 5%;
+    @media (width<=700px) {
+        display: block
+    }
 }
 
 .song-div iframe{
@@ -9,6 +12,9 @@
     padding: 1%;
     border-radius: 2%;
     box-shadow: 5px 5px 10px;
+    @media (width<=600px) {
+        max-width: 90vw;
+    }
 }
 
 .song-innerdiv{
@@ -16,9 +22,10 @@
     font-weight: bold;
     text-align: center;
     background-color: #e5e8e8;
-    border-radius: 10%;
+    border-radius: 5%;
     box-shadow: 5px 5px 10px;
     padding: 1%;
+    margin: 10px;
 }
 
 .song-innerdiv button{

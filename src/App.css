@@ -10,6 +10,9 @@
 
 .nav-bar h2 {
   font-size: medium;
+  @media (width<=800px) {
+    display: none;
+  }
 }
 
 .ch1 {
@@ -57,4 +60,8 @@
 
 .foot-style a {
   margin-left: 5%;
+}
+
+.foot-style p{
+  margin-left: 2%;
 }

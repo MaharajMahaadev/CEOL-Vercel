@@ -13,7 +13,7 @@ function Home() {
                         autoplay
                     />
                     <p className='heading'>Upload or Scan Images</p>
-                    <p className='content'>Upload or use the web camera to takes images of human faces to detect the emotions using AI. It supports 7 emotions as Anger, Disgust, Fear, Happy, Sad, Surprise and Neutral.</p>
+                    <p className='content'>Upload or use the web camera to take images of human faces to detect the emotions using AI. It supports 7 emotions as Anger, Disgust, Fear, Happy, Sad, Surprise and Neutral.</p>
                 </div>
                 <div className='tables'>
                     <DotLottieReact className='back-img'
@@ -31,10 +31,12 @@ function Home() {
                         autoplay
                     />
                     <p className='heading'>Song Recommendation</p>
-                    <p className='content'>Depending on the emotion detected by the AI, a certain category of song is played. The recommendation is based on various exisitng research paper data investigating the correlation between songs and emotions.</p>
+                    <p className='content'>Depending on the emotion detected by the AI, a certain category of song is played. The recommendation is based on various existing research paper data investigating the correlation between songs and emotions.</p>
                 </div>
             </div>
+            <div style={{'display':'block'}}>
             <a className='button' href="/predict">Start <MoveRight /></a>
+            </div>
         </section>
     )
 }

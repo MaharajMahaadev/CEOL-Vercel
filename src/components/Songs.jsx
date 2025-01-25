@@ -1,12 +1,13 @@
 import "./componentCSS/Songs.css"
 import data from "../data"
 import React, { useEffect, useState } from "react";
+import { SkipForward } from "lucide-react";
 
 function Songs() {
-    const result = sessionStorage.getItem('result') || "Happy";
+    const result = sessionStorage.getItem('result') || "Undefined";
     const probability = sessionStorage.getItem('probability') || 0.0;
     const [ytUrl, useYtUrl] = useState(data[0][0]);
-    const [songCategory, useSongCategory] = useState(-1);
+    const [songCategory, useSongCategory] = useState(7);
 
     function UsechangeVideo() {
         var temp = Math.random() * 8;
@@ -23,7 +24,7 @@ function Songs() {
     }
 
     const ChangeCategory = (e) => {
-        var val = -1;
+        var val = 7;
         if (e === "Anger") {
             val = 0;
         }
@@ -45,6 +46,9 @@ function Songs() {
         else if (e === "Neutral") {
             val = 6;
         }
+        else{
+            val = 7;
+        }
         useSongCategory(val);
         useYtUrl(data[val][0]);
     }
@@ -62,8 +66,8 @@ function Songs() {
             <div className="song-div">
                 <iframe width="560" height="315" src={"https://www.youtube.com/embed/" + ytUrl} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                 <div className="song-innerdiv">
-                    <p>The recognised emotion is <i>{result}</i>, <br></br> with a confidence of <i>{(probability * 100).toFixed(2)}%</i>. <br></br> Remeber based on detected emotion, the song which <br></br> would invoke positive emotions in relation to it is played.</p>
-                    <button onClick={() => UsechangeVideo()} className="button">Skip Song</button>
+                    <p>The recognised emotion is <i>{result}</i>, <br></br> with a confidence of <i>{(probability * 100).toFixed(2)}%</i>. <br></br> Remember based on detected emotion, the song which <br></br> would invoke positive emotions in relation to it is played.</p>
+                    <button disabled={songCategory===7?true:false} onClick={() => UsechangeVideo()} className='button'>Skip Song <SkipForward size={16} /></button>
                     <select onChange={(e) => ChangeCategory(e.target.value)} className="button">
                         <option disabled selected>Change Song Category</option>
                         <option>Anger</option>

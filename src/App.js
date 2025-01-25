@@ -11,7 +11,10 @@ function App() {
             <nav className="nav-bar">
                 <a href="/" className='ch1'>CEOL</a>
                 <h2>Song Recommendation using Emotion Recognition</h2>
-                <a href="/predict" className='clinks'>Prediction</a>
+                <div>
+                    <a href="/predict" className='clinks'>Prediction</a>
+                    <a href="/play" className='clinks'> Song</a>
+                </div>
             </nav>
             <div className="main-div">
                 <BrowserRouter>

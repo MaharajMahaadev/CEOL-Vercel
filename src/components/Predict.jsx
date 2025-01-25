@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import './componentCSS/Predict.css'
 import Webcam from 'react-webcam'
+import { Camera, ImageIcon, LoaderPinwheel, LucideUpload } from 'lucide-react';
 
 function Predict() {
   const [showDiv, setShowDiv] = useState(true);
@@ -10,7 +11,14 @@ function Predict() {
   const [isLoading, useIsLoading] = useState(1);
 
   function capture() {
-    const file = webcamRef.current.getScreenshot({ width: 600, height: 400 });
+    const file = webcamRef.current.getScreenshot({ width: 400, height: 300 });
+    if (file) {
+      const MAX_SIZE = 500 * 1024; 
+      if (file.size > MAX_SIZE) {
+        alert("The image size exceeds 500 KB. Please upload a smaller image.");
+        return;
+      }
+    }
     setImgSrc(file);
     setBase64Image(file);
   }
@@ -22,6 +30,14 @@ function Predict() {
   };
 
   const handleFile = (file) => {
+    if (file) {
+      const MAX_SIZE = 500 * 1024; 
+      if (file.size > MAX_SIZE) {
+        alert("The image size exceeds 500 KB. Please upload a smaller image.");
+        return;
+      }
+    }
+
     if (file && file.type.startsWith("image/")) {
       const reader = new FileReader();
       reader.onload = () => {
@@ -62,27 +78,25 @@ function Predict() {
         body: JSON.stringify({ img_base64: JSON.stringify({ img: base64Image }) })
       });
 
-      const result = await response.json();
+      if(!response.error){
+        alert("Sorry! The server is down!");
+        val = 1;
+      }
+
+      const result = await response.json();      
       sessionStorage.setItem('result', result.data[0].emotion ?? "Happy");
       sessionStorage.setItem('probability', result.data[0].probability ?? 0.0);
       window.location.href = '/play';
     }
     catch (error) {
-      val = 2;
+      console.log(error);
     }
     useIsLoading(val);
   }
 
   function showLoading() {
 
-    if (isLoading === 3) {
-      return (
-        <div className='loading-div'>
-          Detecting the emotion please wait. <br></br> In rare cases it might take upto 2 minutes.<br></br>  We will let you know if something goes wrong.
-        </div>
-      )
-    }
-    else if (isLoading === 2) {
+    if (isLoading === 2) {
       return (<div className='loading-div'>
         Error in Predicting. Make sure the image size is less or that the image is not corrupted.
         <button onClick={RemoveImage} className="remove-button">Remove Image</button>
@@ -108,41 +122,40 @@ function Predict() {
   return (
     <section className="section-div">
       {showLoading()}
-      <button className='button' onClick={() => setShowDiv(true)}>Upload</button>
-      <button className='button' onClick={() => setShowDiv(false)}>Take Picture</button>
-      <button hidden={showDiv} style={{ 'background-color': '#424949', 'color': '#e5e8e8', 'width': 'fit-content', 'height': 'fit-content', 'padding': '5px' }} onClick={() => capture()}>{imgSrc === null ? 'Capture photo' : 'Capture Again'}</button>
-      <a className='button' onClick={CallBack} >Predict</a>
+      <button className='button' style={showDiv===true?{'backgroundColor':'#e5e8e8', 'color':'#424949'}:{'backgroundColor':'#424949', 'color':'#e5e8e8'}} onClick={() => setShowDiv(true)}><ImageIcon size={16} /> Upload</button>
+      <button className='button' style={showDiv===false?{'backgroundColor':'#e5e8e8', 'color':'#424949'}:{'backgroundColor':'#424949', 'color':'#e5e8e8'}} onClick={() => setShowDiv(false)}>< Camera size={16} /> Take Picture</button>
+      <button disabled={isLoading===1?imgSrc===null?true:false:true} className='button' onClick={CallBack} ><LoaderPinwheel size={16}/> Predict <span style={isLoading===1?{'display':'none'}:{}} className='spinner'></span></button>
       <div>
         {
           showDiv === false ?
             <div className='camdiv'>
-              <Webcam height={400} width={600} screenshotFormat="image/jpeg" ref={webcamRef} />
-              {imgSrc && (<img src={imgSrc} />)}
+              <div className='camdiv-inner'>
+                <div className='camdiv-cam'>
+                  <p>Camera</p>
+                  <Webcam className='camdiv-cam1' screenshotFormat="image/jpeg" ref={webcamRef} />
+                </div>
+                {imgSrc && 
+                <div className='camdiv-img'>
+                  <p>Captured Image</p>
+                <img src={imgSrc} />
+                </div>}
+              </div>
+              <button hidden={showDiv} style={{'margin': '5px'}} className='button' onClick={() => capture()}>{imgSrc === null ? 'Capture photo' : 'Capture Again'}</button>
             </div> :
             <div className='uploaddiv'>
               <div className="drag-drop" onDrop={handleDrop} onDragOver={(e) => e.preventDefault()}>
-                {imgSrc ? (
+                {imgSrc ?
+                    <img src={imgSrc} alt="Uploaded" className="image-preview" /> 
+                    : (
                   <>
-                    <img src={imgSrc} alt="Uploaded" className="image-preview" />
-                    <button onClick={RemoveImage} className="remove-button">
-                      Remove Image
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <p>Drag & drop an image here, or click to select a file</p>
+                    <p><LucideUpload size={16} /> Drag & drop an image here, or click to select a file</p>
                     <input type="file" accept="image/*" onChange={handleFileUpload} className="file-input"/>
                   </>
                 )}
               </div>
-              {!imgSrc && (
-                <button className="upload-button">
-                  <label>
-                    Upload Image
-                    <input type="file" accept="image/*" onChange={handleFileUpload} className="file-input" />
-                  </label>
-                </button>
-              )}
+              { imgSrc ? <button onClick={RemoveImage} className="remove-button">
+                      Remove Image
+                    </button>:null}
             </div>
         }
       </div>

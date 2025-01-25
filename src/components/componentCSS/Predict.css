@@ -4,29 +4,80 @@
 }
 
 .section-div button {
-  margin-right: 5%;
+  margin: 2%;
 }
 
 .loading-div {
   z-index: 10;
   background-color: #e5e8e8;
-  width: 90%;
-  height: 55vh;
+  width: 70vw;
+  height: 75%;
   position: absolute;
   opacity: 95%;
   padding: 5%;
   font-weight: bolder;
   justify-content: center;
   align-content: center;
-  border-radius: 3%;
   box-shadow: 10px 10px 10px;
 }
 
-.camdiv {
-  margin: 1%;
-  display: flex;
-  justify-content: space-between;
+.spinner{
+  animation: spin 2s linear infinite;
+  border: 5px solid #818888; 
+  border-top: 5px solid #e5e8e8; 
+  border-bottom: 5px solid #e5e8e8;
+  border-radius: 100%;
+  width: 15px;
+  height: 15px;
 }
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
+
+.camdiv-inner {
+  font-size:large;
+  font-weight: bold;
+  display: flex;
+  flex-wrap: wrap; /* Ensures content wraps to the next line on smaller screens */
+  gap: 1.5rem; /* Adds spacing between the camera and image sections */
+  justify-content: center; /* Centers items horizontally */
+  align-items: center; /* Aligns items vertically */
+  padding: 1rem; /* Adds some padding to the container */
+}
+
+.camdiv-cam, .camdiv-img {
+  flex: 1 1 45%; /* Each takes up 45% of width on larger screens, but can shrink/grow */
+  max-width: 400px; /* Limits the max width */
+  min-width: 150px; /* Ensures sections don’t shrink too much */
+  text-align: center; /* Centers text and content inside */
+  background: #e5e8e8; /* Subtle background for contrast */
+  border: 1px solid #424949; /* Light border for a clean look */
+  border-radius: 8px; /* Rounded corners */
+  padding: 1rem; /* Adds internal spacing */
+  box-shadow: 2px 2px 8px rgba(114, 109, 109, 0.1); /* Subtle shadow for a modern look */
+}
+
+.camdiv-cam1, .camdiv-img img {
+  max-width: 100%; /* Images will adjust to the container's width */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 6px; /* Rounded corners for images */
+  border: 1px solid #e5e8e8; /* Matches the container border */
+}
+
+@media (max-width: 768px) {
+  .camdiv-inner {
+    flex-direction: column; /* Stack items vertically on smaller screens */
+    gap: 1rem; /* Adjusts spacing for smaller layout */
+  }
+
+  .camdiv-cam, .camdiv-img {
+    flex: 1 1 100%; /* Each takes full width on small screens */
+    max-width: none; /* Removes width limit for smaller layouts */
+  }
+}
+
 
 .uploaddiv {
   margin: 1%;
@@ -35,11 +86,11 @@
 
 /* Container Styling */
 .upload-container {
-  max-width: 600px;
+  width: 100%;
   margin: 0 auto;
   padding: 20px;
   text-align: center;
-  background-color: #f8f9fa;
+  background-color: #e5e8e8;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
@@ -47,21 +98,30 @@
 /* Drag and Drop Area */
 .drag-drop {
   padding: 30px;
-  border: 2px dashed #6c757d;
+  place-self: center;
+  border: 2px dashed #424949;
   border-radius: 8px;
-  background-color: #ffffff;
+  background-color: #e5e8e8;
   margin-bottom: 20px;
   cursor: pointer;
   position: relative;
+  width:fit-content;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  min-width: 50vw;
+  min-height: 30vh;
+  max-width: 1400px;
+  max-height: 1000px;
 }
 
 .drag-drop p {
-  color: #6c757d;
+  color: #424949;
   font-size: 16px;
 }
 
 .drag-drop:hover {
-  background-color: #e9ecef;
+  background-color: #d5d7d7;
 }
 
 .file-input {
@@ -103,6 +163,7 @@
   height: 100%;
 }
 
+
 /* Image Preview */
 .image-preview {
   max-width: 100%;
@@ -115,7 +176,7 @@
 /* Remove Button */
 .remove-button {
   background-color: #dc3545;
-  color: #fff;
+  color: #e5e8e8;
   padding: 8px 15px;
   font-size: 14px;
   border: none;
