@@ -78,35 +78,17 @@ function Predict() {
         body: JSON.stringify({ img_base64: JSON.stringify({ img: base64Image }) })
       });
 
-      if(!response.error){
-        alert("Sorry! The server is down!");
-        val = 1;
-      }
-
       const result = await response.json();      
       sessionStorage.setItem('result', result.data[0].emotion ?? "Happy");
       sessionStorage.setItem('probability', result.data[0].probability ?? 0.0);
       window.location.href = '/play';
     }
     catch (error) {
+      alert("Sorry! There was an issue with the server! ");
       console.log(error);
+      val = 1;
     }
     useIsLoading(val);
-  }
-
-  function showLoading() {
-
-    if (isLoading === 2) {
-      return (<div className='loading-div'>
-        Error in Predicting. Make sure the image size is less or that the image is not corrupted.
-        <button onClick={RemoveImage} className="remove-button">Remove Image</button>
-      </div>)
-    }
-    else {
-      return (
-        null
-      )
-    }
   }
 
   useEffect(() => {
@@ -121,7 +103,6 @@ function Predict() {
 
   return (
     <section className="section-div">
-      {showLoading()}
       <button className='button' style={showDiv===true?{'backgroundColor':'#e5e8e8', 'color':'#424949'}:{'backgroundColor':'#424949', 'color':'#e5e8e8'}} onClick={() => setShowDiv(true)}><ImageIcon size={16} /> Upload</button>
       <button className='button' style={showDiv===false?{'backgroundColor':'#e5e8e8', 'color':'#424949'}:{'backgroundColor':'#424949', 'color':'#e5e8e8'}} onClick={() => setShowDiv(false)}>< Camera size={16} /> Take Picture</button>
       <button disabled={isLoading===1?imgSrc===null?true:false:true} className='button' onClick={CallBack} ><LoaderPinwheel size={16}/> Predict <span style={isLoading===1?{'display':'none'}:{}} className='spinner'></span></button>

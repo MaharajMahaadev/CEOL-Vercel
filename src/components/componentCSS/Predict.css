@@ -7,20 +7,6 @@
   margin: 2%;
 }
 
-.loading-div {
-  z-index: 10;
-  background-color: #e5e8e8;
-  width: 70vw;
-  height: 75%;
-  position: absolute;
-  opacity: 95%;
-  padding: 5%;
-  font-weight: bolder;
-  justify-content: center;
-  align-content: center;
-  box-shadow: 10px 10px 10px;
-}
-
 .spinner{
   animation: spin 2s linear infinite;
   border: 5px solid #818888; 
